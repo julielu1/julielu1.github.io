@@ -21,3 +21,32 @@ function toggleSwitch() {
         }, 300);    
     }
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    const images = document.querySelectorAll('.image-gallery img');
+    const popupContainer = document.querySelector('.popup-container');
+    const popupImage = document.querySelector('.popup-image');
+    const popupDescription = document.querySelector('.popup-description');
+  
+    images.forEach(function(image) {
+      image.addEventListener('click', function() {
+        popupImage.src = this.src;
+        popupDescription.innerText = this.alt;
+        popupContainer.style.display = 'block';
+      });
+    });
+  
+    const closePopup = document.querySelector('.close');
+    closePopup.addEventListener('click', function() {
+      popupContainer.style.display = 'none';
+    });
+  
+    popupContainer.addEventListener('click', function(event) {
+      if (event.target === popupContainer) {
+        popupContainer.style.display = 'none';
+      }
+    });
+  });
+  
+  
+  
