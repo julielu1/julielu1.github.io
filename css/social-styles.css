@@ -1,0 +1,87 @@
+/* Reset default browser styles */
+body,
+h1,
+h2,
+h3, 
+p,
+ul,
+li,
+nav,
+header,
+footer {
+    color: #111;
+}
+
+/* Global styles */
+body {
+    color: #111;
+    background-image: url("../images/light-background3.jpg");
+    background-color: #f4f4f4 !important;
+}
+
+/* Header styles */
+header {
+    background: none;
+    color: #111;
+}
+
+header nav ul li a {
+    color: #111;
+}
+
+.selected-page {
+    color: #ea5023;
+}
+
+/* Fun fact */
+h3 {
+    color: #ea5023 !important;
+}
+
+/* Main content styles */
+.me .left-container {
+    color: #111;
+}
+
+.title-buttons {
+    background-color: rgb(20, 146, 212, 0.6);
+    border-color: #faed48;
+    color: #fff
+}
+
+/* About */
+.about .left-container, .about .right-container {
+    color: black;
+  }
+
+.about .right-container h2 {
+    color: black;
+}
+
+/* Weather container */
+.weather-container {
+    background: rgba(233, 233, 233, 0.6);
+    color: #222;
+}    
+
+/* Footer styles */
+footer {
+    border-top: 1px solid #111;
+    color: #111;
+}
+
+.icon-div {
+    border: 1px solid #111;
+}
+
+.social-media-icon {
+    color: #111;
+}
+
+footer ul li ul a {
+    color: #111;
+}
+
+.footer-navi-header {
+    color: #444;
+}
