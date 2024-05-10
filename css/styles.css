@@ -153,7 +153,7 @@ header h1 {
 }
 
 /* Fun fact */
-h3 {
+.fun-fact {
   color: #ea5023 !important;
   padding-top: 10px;
   font-size: 0.8em !important;
@@ -293,7 +293,7 @@ section {
   line-height: 1.5;
 }
 
-/* Gallery content */
+/* Media - gallery content */
 .image-gallery {
   max-width: 70%;
   margin: 0 auto;
@@ -376,6 +376,26 @@ section {
   font-size: 24px;
 }
 
+/* Travel content */
+.travel-main {
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 70%;
+  margin: 0 auto;
+}
+
+.travel-main div:first-child {
+  /* background-color: blue; */
+  /* width: 20%; */
+  flex: 1 1 20%;
+
+}
+
+.travel-main div:last-child {
+  /* width: 100%; */
+  flex: 1 1 80%;
+
+}
 
 /* Weather container */
 .weather-container {
