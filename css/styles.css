@@ -186,7 +186,7 @@ main {
 
 .experiences-heading h1,
 .experiences-heading p {
-    margin: 0 20px 0; /* Adjust as needed */
+    margin: 0 20px 0;
     width: 50%;
 }
 
@@ -378,23 +378,48 @@ section {
 
 /* Travel content */
 .travel-main {
-  display: flex;
-  flex-wrap: wrap;
   max-width: 70%;
   margin: 0 auto;
+  margin-bottom: 3%;
 }
 
-.travel-main div:first-child {
-  /* background-color: blue; */
-  /* width: 20%; */
-  flex: 1 1 20%;
-
+.map-box {
+  max-width: 70%;
+  margin: 0 auto;
+  border: 0.5px solid black;
+  background-color: lightblue;
+  margin-bottom: 3%;
+  padding: 5px;
 }
 
-.travel-main div:last-child {
-  /* width: 100%; */
-  flex: 1 1 80%;
+#world-svg {
+  max-width: 100%;
+  height: auto;
+}
 
+#country-name {
+  color: gray;
+}
+
+.travel-information {
+  max-width: 70%;
+  margin: 0 auto;
+  border: 1px black solid;
+  padding: 10px;
+}
+
+.travel-information ul{ 
+  display: flex;
+  list-style: none;
+  padding: 0px;
+  justify-content: space-between;
+  width: 40%;
+}
+
+.country-visit-number {
+  width: auto;
+  text-align: end;
+  display: flex;
 }
 
 /* Weather container */
