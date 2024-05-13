@@ -1,5 +1,3 @@
-// import tripsData from "./trips.js";
-
 // Top switches
 function toggleSwitch() {
   console.log("Switch is toggling!");
@@ -25,32 +23,92 @@ function toggleSwitch() {
   }
 }
 
+// Weather API
+function setWeatherContainer(cityName, temperature, conditionText, iconPath) {
+    const weatherContainer = document.getElementById("weather-container");
+    weatherContainer.innerHTML = `<div>Looks like you're visiting from ${cityName}! The local weather is ${temperature}°C and ${conditionText}<img height="50px" src="${iconPath}" alt="${conditionText}"> </div>`;
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    async function getLocationAndWeather() {
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(async function(position) {
+                const latitude = position.coords.latitude;
+                const longitude = position.coords.longitude;
+
+                const weatherapikey = `c839316b88fd4ecfad9104852241305`
+                const weatherApiUrl = `https://api.weatherapi.com/v1/current.json?key=${weatherapikey}&q=${latitude},${longitude}&aqi=no`;
+                const response = await fetch(weatherApiUrl);
+                const data = await response.json();
+
+                const cityName = data.location.name
+                const temperature = data.current.temp_c;
+                const conditionText = data.current.condition.text;
+                const isDay = data.current.is_day === 1;
+                const iconCode = data.current.condition.icon.split("/").pop();
+                const iconPath = `images/weather/${isDay ? 'day' : 'night'}/${iconCode}`;
+
+                localStorage.setItem("weatherData", JSON.stringify({ cityName, temperature, conditionText, iconPath }));
+
+                setWeatherContainer(cityName, temperature, conditionText, iconPath);
+
+                localStorage.setItem("lastWeatherUpdate", Date.now());
+            });
+        }
+    }
+
+    // Function to check if 30 min has passed
+    function shouldUpdateWeather() {
+        const lastWeatherUpdate = localStorage.getItem("lastWeatherUpdate");
+        if (!lastWeatherUpdate) {
+            return true;
+        }
+        const oneHour = 30 * 60 * 1000; // 30 mins
+        return Date.now() - lastWeatherUpdate > oneHour;
+    }
+
+    if (shouldUpdateWeather()) {
+        getLocationAndWeather();
+    } else {
+        const storedWeatherData = localStorage.getItem("weatherData");
+        if (storedWeatherData) {
+            const { cityName, temperature, conditionText, iconPath } = JSON.parse(storedWeatherData);
+            setWeatherContainer(cityName, temperature, conditionText, iconPath);
+        }
+        else {
+            getLocationAndWeather();
+        }
+    }
+});
+
+
+
 // Media page
 document.addEventListener("DOMContentLoaded", function () {
     if (window.location.pathname.endsWith("media.html")) {
-    const images = document.querySelectorAll(".image-gallery img");
-    const popupContainer = document.querySelector(".popup-container");
-    const popupImage = document.querySelector(".popup-image");
-    const popupDescription = document.querySelector(".popup-description");
+        const images = document.querySelectorAll(".image-gallery img");
+        const popupContainer = document.querySelector(".popup-container");
+        const popupImage = document.querySelector(".popup-image");
+        const popupDescription = document.querySelector(".popup-description");
 
-    images.forEach(function (image) {
-        image.addEventListener("click", function () {
-        popupImage.src = this.src;
-        popupDescription.innerText = this.alt;
-        popupContainer.style.display = "block";
+        images.forEach(function (image) {
+            image.addEventListener("click", function () {
+            popupImage.src = this.src;
+            popupDescription.innerText = this.alt;
+            popupContainer.style.display = "block";
+            });
         });
-    });
 
-    const closePopup = document.querySelector(".close");
-    closePopup.addEventListener("click", function () {
-        popupContainer.style.display = "none";
-    });
+        const closePopup = document.querySelector(".close");
+        closePopup.addEventListener("click", function () {
+            popupContainer.style.display = "none";
+        });
 
-    popupContainer.addEventListener("click", function (event) {
-        if (event.target === popupContainer) {
-        popupContainer.style.display = "none";
-        }
-    });
+        popupContainer.addEventListener("click", function (event) {
+            if (event.target === popupContainer) {
+            popupContainer.style.display = "none";
+            }
+        });
     }
 });
 
@@ -59,7 +117,8 @@ document.addEventListener('DOMContentLoaded', function() {
     if (window.location.pathname.endsWith("travel.html")) 
     {
         function displayName(name) {
-            document.getElementById('country-name').firstChild.data = name;
+            const flag = getFlagEmoji(name);
+            document.getElementById('country-name').firstChild.data = flag + name;
         }
 
         function undisplayName() {
@@ -70,7 +129,7 @@ document.addEventListener('DOMContentLoaded', function() {
             let replaced = country.replace(/ /g, ".");
             const paths = document.querySelectorAll('.' + replaced);
             paths.forEach(path => {
-                path.setAttribute('fill', 'red'); // Change the fill color to red (or any other color you prefer)
+                path.style.fill = 'red'; // Set the fill color directly
             });
         }
 
@@ -78,30 +137,77 @@ document.addEventListener('DOMContentLoaded', function() {
             let replaced = country.replace(/ /g, ".");
             const paths = document.querySelectorAll('.' + replaced);
             paths.forEach(path => {
-                path.setAttribute('fill', ''); // Reset the fill color
+                const trips = tripsData[country];
+                let color = 'white'; // Default color is white
+                if (trips && trips.length > 0) {
+                    // Use shades of gray based on the number of trips
+                    const shade = Math.min(255, Math.max(0, Math.round(255 - trips.length * 32)));
+                    color = `rgb(${shade}, ${shade}, ${shade})`;
+                }
+                path.style.fill = color; // 
             });
         }
         
         //display with js
+        function getFlagEmoji(country) {
+            return countryFlags[country] || '';
+        }
+        
         function displayInformation(country) {
+            // Get the information for the country
             const trips = tripsData[country];
+            const tripCardsContainer = document.querySelector('.trip-cards-container');
+        
+            // Remove existing trip cards
+            tripCardsContainer.innerHTML = '';
+        
+            // For each trip within the country, create a new list item for each trip
             if (trips) {
-                console.log(trips);
                 for (let i = 0; i < trips.length; i++) {
-                    console.log(trips[i]);
-            };
-                document.querySelector('.country-name-selected').innerHTML = `${trips[0]['country']}`;
-                document.querySelector('.country-visit-number').innerHTML = `${trips[0]['name']}`;
-                document.querySelector('.date-travelled').innerHTML = `${trips[0]['date']}`;
-                document.querySelector('.trip-information').innerHTML = `${trips[0]['description']}`;
+                    const trip = trips[i];
+                    const tripCard = document.createElement('li');
+                    tripCard.classList.add('trip-card');
+                    let photosHtml = '';
+                    for (let j = 0; j < trip.photos.length; j++) {
+                        photosHtml += `<img src="${trip.photos[j]}" alt="Image description">`;
+                    }
+                    tripCard.innerHTML = `
+                        <h4>#${trip.name} ${trip.date}</h4>
+                        <p><strong>Cities: ${trip.cities}</strong></p>
+                        <p>${trip.description}</p>
+                        <div class="photos-container">${photosHtml}</div>
+                    `;
+                    tripCardsContainer.appendChild(tripCard);
+                }
+        
+                // Update other information
+                document.querySelector('.country-name-selected').innerHTML = `${getFlagEmoji(trips[0].country)} ${trips[0]['country']}`;
+                document.querySelector('.country-visit-number').innerHTML = `Visits: ${trips.length}`;
             } else {
-                document.querySelector('.country-name-selected').innerHTML = ` `;
+                // If there are no trips, display a message
+                document.querySelector('.country-name-selected').innerHTML = `${getFlagEmoji(country)} ${country}`;
                 document.querySelector('.country-visit-number').innerHTML = ` `;
-                document.querySelector('.date-travelled').innerHTML = ` `;
-                document.querySelector('.trip-information').innerHTML = 'No trip information available for this country.';
+                tripCardsContainer.innerHTML = `<li>I haven't travelled to ${country} yet!</li>`;
             }
         }
 
+        function shadeCountries() {
+            const pathElements = document.querySelectorAll('path');
+            pathElements.forEach(path => {
+                const countryName = path.getAttribute('class');
+                const trips = tripsData[countryName];
+                let color = 'white'; // Default color is white
+                if (trips && trips.length > 0) {
+                    // Use shades of gray based on the number of trips
+                    const shade = Math.min(255, Math.max(0, Math.round(255 - trips.length * 32)));
+                    color = `rgb(${shade}, ${shade}, ${shade})`;
+                }
+                path.style.fill = color;
+            });
+        }
+
+        shadeCountries();
+        
         const pathElements = document.querySelectorAll('path');
 
         pathElements.forEach(path => {
@@ -121,27 +227,233 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+const countryFlags = {
+    'Afghanistan': '🇦🇫',
+    'Albania': '🇦🇱',
+    'Algeria': '🇩🇿',
+    'Andorra': '🇦🇩',
+    'Angola': '🇦🇴',
+    'Antigua & Barbuda': '🇦🇬',
+    'Argentina': '🇦🇷',
+    'Armenia': '🇦🇲',
+    'Australia': '🇦🇺',
+    'Austria': '🇦🇹',
+    'Azerbaijan': '🇦🇿',
+    'Bahamas': '🇧🇸',
+    'Bahrain': '🇧🇭',
+    'Bangladesh': '🇧🇩',
+    'Barbados': '🇧🇧',
+    'Belarus': '🇧🇾',
+    'Belgium': '🇧🇪',
+    'Belize': '🇧🇿',
+    'Benin': '🇧🇯',
+    'Bhutan': '🇧🇹',
+    'Bolivia': '🇧🇴',
+    'Bosnia & Herzegovina': '🇧🇦',
+    'Botswana': '🇧🇼',
+    'Brazil': '🇧🇷',
+    'Brunei': '🇧🇳',
+    'Bulgaria': '🇧🇬',
+    'Burkina Faso': '🇧🇫',
+    'Burundi': '🇧🇮',
+    'Cabo Verde': '🇨🇻',
+    'Cambodia': '🇰🇭',
+    'Cameroon': '🇨🇲',
+    'Canada': '🇨🇦',
+    'Central African Republic': '🇨🇫',
+    'Chad': '🇹🇩',
+    'Chile': '🇨🇱',
+    'China': '🇨🇳',
+    'Colombia': '🇨🇴',
+    'Comoros': '🇰🇲',
+    'Democratic Republic of the Congo': '🇨🇬',
+    'Costa Rica': '🇨🇷',
+    'Croatia': '🇭🇷',
+    'Cuba': '🇨🇺',
+    'Cyprus': '🇨🇾',
+    'Czech Republic': '🇨🇿',
+    'Denmark': '🇩🇰',
+    'Djibouti': '🇩🇯',
+    'Dominica': '🇩🇲',
+    'Dominican Republic': '🇩🇴',
+    'Ecuador': '🇪🇨',
+    'Egypt': '🇪🇬',
+    'El Salvador': '🇸🇻',
+    'Equatorial Guinea': '🇬🇶',
+    'Eritrea': '🇪🇷',
+    'Estonia': '🇪🇪',
+    'Eswatini': '🇸🇿',
+    'Ethiopia': '🇪🇹',
+    'Falkland Islands': '🇫🇰',
+    'Fiji': '🇫🇯',
+    'Finland': '🇫🇮',
+    'France': '🇫🇷',
+    'Gabon': '🇬🇦',
+    'Gambia': '🇬🇲',
+    'Georgia': '🇬🇪',
+    'Germany': '🇩🇪',
+    'Ghana': '🇬🇭',
+    'Greece': '🇬🇷',
+    'Greenland': '🇬🇱',
+    'Grenada': '🇬🇩',
+    'Guatemala': '🇬🇹',
+    'Guinea': '🇬🇳',
+    'Guinea-Bissau': '🇬🇼',
+    'French Guiana': '🇬🇾',
+    'Haiti': '🇭🇹',
+    'Honduras': '🇭🇳',
+    'Hungary': '🇭🇺',
+    'Iceland': '🇮🇸',
+    'India': '🇮🇳',
+    'Indonesia': '🇮🇩',
+    'Iran': '🇮🇷',
+    'Iraq': '🇮🇶',
+    'Ireland': '🇮🇪',
+    'Israel': '🇮🇱',
+    'Italy': '🇮🇹',
+    'Jamaica': '🇯🇲',
+    'Japan': '🇯🇵',
+    'Jordan': '🇯🇴',
+    'Kazakhstan': '🇰🇿',
+    'Kenya': '🇰🇪',
+    'Kiribati': '🇰🇮',
+    'Dem Rep Korea': '🇰🇵',
+    'Republic of Korea': '🇰🇷',
+    'Kosovo': '🇽🇰',
+    'Kuwait': '🇰🇼',
+    'Kyrgyzstan': '🇰🇬',
+    'Lao PDR': '🇱🇦',
+    'Latvia': '🇱🇻',
+    'Lebanon': '🇱🇧',
+    'Lesotho': '🇱🇸',
+    'Liberia': '🇱🇷',
+    'Libya': '🇱🇾',
+    'Liechtenstein': '🇱🇮',
+    'Lithuania': '🇱🇹',
+    'Luxembourg': '🇱🇺',
+    'Madagascar': '🇲🇬',
+    'Malawi': '🇲🇼',
+    'Malaysia': '🇲🇾',
+    'Maldives': '🇲🇻',
+    'Mali': '🇲🇱',
+    'Malta': '🇲🇹',
+    'Marshall Islands': '🇲🇭',
+    'Mauritania': '🇲🇷',
+    'Mauritius': '🇲🇺',
+    'Mexico': '🇲🇽',
+    'Micronesia': '🇫🇲',
+    'Moldova': '🇲🇩',
+    'Monaco': '🇲🇨',
+    'Mongolia': '🇲🇳',
+    'Montenegro': '🇲🇪',
+    'Morocco': '🇲🇦',
+    'Mozambique': '🇲🇿',
+    'Myanmar': '🇲🇲',
+    'Namibia': '🇳🇦',
+    'Nauru': '🇳🇷',
+    'Nepal': '🇳🇵',
+    'Netherlands': '🇳🇱',
+    'New Zealand': '🇳🇿',
+    'Nicaragua': '🇳🇮',
+    'Niger': '🇳🇪',
+    'Nigeria': '🇳🇬',
+    'North Macedonia': '🇲🇰',
+    'Norway': '🇳🇴',
+    'Oman': '🇴🇲',
+    'Pakistan': '🇵🇰',
+    'Palau': '🇵🇼',
+    'Palestine': '🇵🇸',
+    'Panama': '🇵🇦',
+    'Papua New Guinea': '🇵🇬',
+    'Paraguay': '🇵🇾',
+    'Peru': '🇵🇪',
+    'Philippines': '🇵🇭',
+    'Poland': '🇵🇱',
+    'Portugal': '🇵🇹',
+    'Qatar': '🇶🇦',
+    'Romania': '🇷🇴',
+    'Russian Federation': '🇷🇺',
+    'Rwanda': '🇷🇼',
+    'Saint Kitts & Nevis': '🇰🇳',
+    'Saint Lucia': '🇱🇨',
+    'Saint Vincent & Grenadines': '🇻🇨',
+    'Samoa': '🇼🇸',
+    'San Marino': '🇸🇲',
+    'Sao Tome & Principe': '🇸🇹',
+    'Saudi Arabia': '🇸🇦',
+    'Senegal': '🇸🇳',
+    'Serbia': '🇷🇸',
+    'Seychelles': '🇸🇨',
+    'Sierra Leone': '🇸🇱',
+    'Singapore': '🇸🇬',
+    'Slovakia': '🇸🇰',
+    'Slovenia': '🇸🇮',
+    'Solomon Islands': '🇸🇧',
+    'Somalia': '🇸🇴',
+    'South Africa': '🇿🇦',
+    'South Sudan': '🇸🇸',
+    'Spain': '🇪🇸',
+    'Sri Lanka': '🇱🇰',
+    'Sudan': '🇸🇩',
+    'Suriname': '🇸🇷',
+    'Sweden': '🇸🇪',
+    'Switzerland': '🇨🇭',
+    'Syria': '🇸🇾',
+    'Taiwan': '🇹🇼',
+    'Tajikistan': '🇹🇯',
+    'Tanzania': '🇹🇿',
+    'Thailand': '🇹🇭',
+    'Timor-Leste': '🇹🇱',
+    'Togo': '🇹🇬',
+    'Tonga': '🇹🇴',
+    'Trinidad & Tobago': '🇹🇹',
+    'Tunisia': '🇹🇳',
+    'Turkey': '🇹🇷',
+    'Turkmenistan': '🇹🇲',
+    'Tuvalu': '🇹🇻',
+    'Uganda': '🇺🇬',
+    'Ukraine': '🇺🇦',
+    'United Arab Emirates': '🇦🇪',
+    'United Kingdom': '🇬🇧',
+    'United States': '🇺🇸',
+    'Uruguay': '🇺🇾',
+    'Uzbekistan': '🇺🇿',
+    'Vanuatu': '🇻🇺',
+    'Vatican City': '🇻🇦',
+    'Venezuela': '🇻🇪',
+    'Vietnam': '🇻🇳',
+    'Yemen': '🇾🇪',
+    'Zambia': '🇿🇲',
+    'Zimbabwe': '🇿🇼',
+};
+
 const tripsData = {
     "China": [
         {
             "country": "China",
-            "name": "Trip 1",
+            "name": "1",
             "date": "November 2023",
-            "description": "Saw the Great Wall"
+            "cities": "Shanghai, Guangzhou",
+            "description": "Saw the Great Wall yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap. Iyap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap. Iyap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap. Iyap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap. Iyap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap. Iyap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap. Iyap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap. Iyap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap. I",
+            "photos": ["images/aerial-photo.png", "images/aerial-photo.png", "images/aerial-photo.png", "images/aerial-photo.png", ]
         },
         {
             "country": "China",
-            "name": "Trip 2",
+            "name": "2",
             "date": "December 2024",
-            "description": "Saw the terracotta warriors"
+            "cities": "Shanghai, Guangzhou",
+            "description": "Saw the terracotta warriors",
+            "photos": ["path_to_china_image1.jpg", "path_to_china_image2.jpg"]
         }
     ],
     "Australia": [
         {
             "country": "Australia",
-            "name": "Trip 1",
+            "name": "1",
             "date": "January 2021",
-            "description": "Saw the opera house"
+            "cities": "Sydney, Brisbane",
+            "description": "Saw the opera house",
+            "photos": ["path_to_australia_image1.jpg", "path_to_australia_image2.jpg"]
         }
     ]
 };

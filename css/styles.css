@@ -163,6 +163,7 @@ header h1 {
 /* Main content styles */
 main {
   padding: 20px;
+  margin-bottom: 3%;
 }
 
 .media-main h2 {
@@ -203,10 +204,6 @@ main {
   align-items: end;
 }
 
-section {
-  margin-bottom: 20px;
-}
-
 .me {
   margin: 0 auto;
   display: flex;
@@ -239,6 +236,11 @@ section {
   font-size: 0.6em;
   border-color: #faed48;
   color: #fff;
+}
+
+.title-buttons a {
+  text-decoration: none;
+  color: white;
 }
 
 .me .right-container img {
@@ -328,16 +330,16 @@ section {
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+  background-color: rgba(0, 0, 0, 0.7);
   color: white;
   padding: 5px;
   box-sizing: border-box;
-  opacity: 0; /* Hidden by default */
+  opacity: 0;
   transition: opacity 0.3s;
 }
 
 .image-gallery li:hover .hover-text {
-  opacity: 1; /* Show on hover */
+  opacity: 1
 }
 
 /* Image pop up */
@@ -408,22 +410,51 @@ section {
   padding: 10px;
 }
 
-.travel-information ul{ 
-  display: flex;
-  list-style: none;
-  padding: 0px;
-  justify-content: space-between;
-  width: 40%;
-}
-
 .country-visit-number {
   width: auto;
   text-align: end;
   display: flex;
+  color: gray;
 }
 
+.trip-cards-container {
+  display: block;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.trip-card {
+  border: 1px solid black;
+  padding: 20px;
+  margin: 20px 10px 20px;
+}
+
+.trip-card h3 {
+  margin-top: 0;
+  color: gray !important;
+}
+
+.trip-card p {
+  margin-bottom: 5px;
+  max-height: 100px; /* Set the maximum height */
+  overflow-y: auto; /* Allow vertical scrolling */
+}
+
+.photos-container {
+  overflow-x: auto;
+  white-space: nowrap; /* Prevent line breaks */
+  max-height: 200px; /* Set a maximum height for the container */
+}
+
+.photos-container img {
+  height: 150px; /* Set a specific height for the images */
+  margin-right: 10px; /* Add some spacing between images */
+}
+
+
 /* Weather container */
-.weather-container {
+#weather-container {
   background: rgb(2, 2, 2, 0.6);
   color: #fff;
   text-align: center;
@@ -432,6 +463,12 @@ section {
   bottom: 0;
   width: 100%;
   z-index: 100;
+}
+
+#image-char {
+  background-image: "";
+  background-size: contain;
+  background-repeat: no-repeat;
 }
 
 /* Footer styles */
