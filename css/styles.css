@@ -248,15 +248,31 @@ main {
   width: 300px;
 }
 
+#blue-arrows img {
+  padding: 5% 0 5%;
+  width: 20%;
+}
+
 #blue-arrows {
   display: flex;
   justify-content: center;
   margin-top: 20px;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: pointer;
+  animation: pulse 2s infinite;
 }
 
-#blue-arrows img {
-  padding: 5% 0 5%;
-  width: 20%;
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 0.2;
+    transform: translateY(10px);
+  }
 }
 
 /* About */

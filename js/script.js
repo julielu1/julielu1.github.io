@@ -25,6 +25,14 @@ function toggleSwitch() {
   }
 }
 
+// Blue arrow animation
+document.addEventListener("DOMContentLoaded", function () {    
+    document.getElementById('blue-arrows').addEventListener('click', function() {
+        const aboutSection = document.querySelector('.about');
+        aboutSection.scrollIntoView({ behavior: 'smooth' });
+    });
+});
+
 // Fun Fact
 document.addEventListener("DOMContentLoaded", function () {
     const funFactElement = document.querySelector('.fun-fact');
@@ -49,11 +57,8 @@ document.addEventListener("DOMContentLoaded", function () {
         updateFunFact();
     }
     
-    showFunFact();
+    showFunFact();    
 });
-
-
-
 
 // Weather API
 function setWeatherContainer(cityName, temperature, conditionText, iconPath) {
@@ -114,8 +119,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 
-
-// Media page
+// Media page only
 document.addEventListener("DOMContentLoaded", function () {
     if (window.location.pathname.endsWith("media.html")) {
         const images = document.querySelectorAll(".image-gallery img");
