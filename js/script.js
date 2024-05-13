@@ -2,6 +2,12 @@
 function toggleSwitch() {
   console.log("Switch is toggling!");
 
+  function changePage(page) {
+    setTimeout(function() {
+        window.location.href = page;
+    }, 300);
+    }
+
   const element = document.querySelector(
     ".toggleCheckbox + .toggleContainer div:first-child"
   );
@@ -10,16 +16,12 @@ function toggleSwitch() {
 
   // Set to Social
   if (color === "rgb(234, 80, 35)") {
-    setTimeout(function () {
-      window.location.href = "social.html";
-    }, 300);
+    changePage('social.html');
   }
 
   // Set to Professional
   if (color === "rgb(0, 0, 0)") {
-    setTimeout(function () {
-      window.location.href = "index.html";
-    }, 300);
+    changePage('index.html');
   }
 }
 
