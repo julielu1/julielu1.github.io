@@ -14,12 +14,12 @@ function toggleSwitch() {
   const style = window.getComputedStyle(element);
   const color = style.getPropertyValue("color");
 
-  // Set to Social
+  // Set to Social if colour is orange
   if (color === "rgb(234, 80, 35)") {
     changePage('social.html');
   }
 
-  // Set to Professional
+  // Set to Professional if color is white
   if (color === "rgb(0, 0, 0)") {
     changePage('index.html');
   }
@@ -53,7 +53,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const lastFunFactUpdate = localStorage.getItem("lastFunFactUpdate");
     const lastFunFact = localStorage.getItem("lastFunFact");
 
-    if (lastFunFact === null || Date.now() - parseInt(lastFunFactUpdate) > 5 * 60 * 1000) {
+    // 5 minutes
+    var funFactThreshold =  5 * 60 * 1000;
+    if (lastFunFact === null || Date.now() - parseInt(lastFunFactUpdate) > funFactThreshold) {
         updateFunFact();
     }
     
@@ -100,8 +102,10 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!lastWeatherUpdate) {
             return true;
         }
-        const oneHour = 30 * 60 * 1000; // 30 mins
-        return Date.now() - lastWeatherUpdate > oneHour;
+        
+         // 30 mins
+        const weatherThreshold = 30 * 60 * 1000;
+        return Date.now() - lastWeatherUpdate > weatherThreshold;
     }
 
     if (shouldUpdateWeather()) {
