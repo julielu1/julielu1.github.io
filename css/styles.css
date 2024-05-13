@@ -30,6 +30,16 @@ body {
   overflow: scroll;
 }
 
+body.fade-out {
+  /* Set the opacity to 0 to fade out */
+  opacity: 0;
+}
+
+body.fade-in {
+  /* Set the opacity back to 1 to fade in */
+  opacity: 1;
+}
+
 /* Header styles */
 header {
   background: none;

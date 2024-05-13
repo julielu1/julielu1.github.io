@@ -23,6 +23,36 @@ function toggleSwitch() {
   }
 }
 
+// Fun Fact
+document.addEventListener("DOMContentLoaded", function () {
+    const funFactElement = document.querySelector('.fun-fact');
+
+    function updateFunFact() {
+        const randomIndex = Math.floor(Math.random() * funFacts.length);
+        const randomFact = `Did you know? ${funFacts[randomIndex]}`;
+        funFactElement.textContent = randomFact;
+        localStorage.setItem("lastFunFactUpdate", Date.now());
+        localStorage.setItem("lastFunFact", randomFact);
+    }
+
+    function showFunFact() {
+        const lastFunFact = localStorage.getItem("lastFunFact");
+        funFactElement.textContent = lastFunFact;
+    }
+
+    const lastFunFactUpdate = localStorage.getItem("lastFunFactUpdate");
+    const lastFunFact = localStorage.getItem("lastFunFact");
+
+    if (lastFunFact === null || Date.now() - parseInt(lastFunFactUpdate) > 5 * 60 * 1000) {
+        updateFunFact();
+    }
+    
+    showFunFact();
+});
+
+
+
+
 // Weather API
 function setWeatherContainer(cityName, temperature, conditionText, iconPath) {
     const weatherContainer = document.getElementById("weather-container");
@@ -129,7 +159,7 @@ document.addEventListener('DOMContentLoaded', function() {
             let replaced = country.replace(/ /g, ".");
             const paths = document.querySelectorAll('.' + replaced);
             paths.forEach(path => {
-                path.style.fill = 'red'; // Set the fill color directly
+                path.style.fill = 'red';
             });
         }
 
@@ -138,13 +168,12 @@ document.addEventListener('DOMContentLoaded', function() {
             const paths = document.querySelectorAll('.' + replaced);
             paths.forEach(path => {
                 const trips = tripsData[country];
-                let color = 'white'; // Default color is white
+                let color = 'white';
                 if (trips && trips.length > 0) {
-                    // Use shades of gray based on the number of trips
                     const shade = Math.min(255, Math.max(0, Math.round(255 - trips.length * 32)));
                     color = `rgb(${shade}, ${shade}, ${shade})`;
                 }
-                path.style.fill = color; // 
+                path.style.fill = color;
             });
         }
         
@@ -154,11 +183,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         function displayInformation(country) {
-            // Get the information for the country
             const trips = tripsData[country];
             const tripCardsContainer = document.querySelector('.trip-cards-container');
-        
-            // Remove existing trip cards
             tripCardsContainer.innerHTML = '';
         
             // For each trip within the country, create a new list item for each trip
@@ -180,11 +206,9 @@ document.addEventListener('DOMContentLoaded', function() {
                     tripCardsContainer.appendChild(tripCard);
                 }
         
-                // Update other information
                 document.querySelector('.country-name-selected').innerHTML = `${getFlagEmoji(trips[0].country)} ${trips[0]['country']}`;
                 document.querySelector('.country-visit-number').innerHTML = `Visits: ${trips.length}`;
             } else {
-                // If there are no trips, display a message
                 document.querySelector('.country-name-selected').innerHTML = `${getFlagEmoji(country)} ${country}`;
                 document.querySelector('.country-visit-number').innerHTML = ` `;
                 tripCardsContainer.innerHTML = `<li>I haven't travelled to ${country} yet!</li>`;
@@ -196,9 +220,8 @@ document.addEventListener('DOMContentLoaded', function() {
             pathElements.forEach(path => {
                 const countryName = path.getAttribute('class');
                 const trips = tripsData[countryName];
-                let color = 'white'; // Default color is white
+                let color = 'white';
                 if (trips && trips.length > 0) {
-                    // Use shades of gray based on the number of trips
                     const shade = Math.min(255, Math.max(0, Math.round(255 - trips.length * 32)));
                     color = `rgb(${shade}, ${shade}, ${shade})`;
                 }
@@ -227,6 +250,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+// Considered putting this information into another file, but it caused CORS issues. Most effective method was to just leave it here.
 const countryFlags = {
     'Afghanistan': '🇦🇫',
     'Albania': '🇦🇱',
@@ -426,6 +450,12 @@ const countryFlags = {
     'Zambia': '🇿🇲',
     'Zimbabwe': '🇿🇼',
 };
+
+const funFacts = [
+    "These fun facts are updated every 5 minutes",
+    "I've visited over 10 countries in the past year.",
+    "I'm learning to play the guitar.",
+  ];
 
 const tripsData = {
     "China": [
