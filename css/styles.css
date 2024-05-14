@@ -277,7 +277,7 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  max-width: 90%;
+  max-width: 70%;
   margin: 0 auto;
 }
 
@@ -614,7 +614,7 @@ footer ul li ul a {
 
   .me .right-container img {
     height: auto;
-    width: 220px;
+    width: 250px;
   }
 
   .about {
@@ -622,6 +622,7 @@ footer ul li ul a {
     flex-direction: column-reverse;
     align-items: center;
     justify-content: flex-start;
+    max-width: 80%;
   }
 
   .about:nth-of-type(3) {
