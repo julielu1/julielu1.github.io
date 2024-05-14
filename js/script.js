@@ -160,7 +160,7 @@ document.addEventListener('DOMContentLoaded', function() {
     {
         function displayName(name) {
             const flag = getFlagEmoji(name);
-            document.getElementById('country-name').firstChild.data = flag + name;
+            document.getElementById('country-name').firstChild.data = flag + ' ' + name;
         }
 
         function undisplayName() {
