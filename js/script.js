@@ -189,7 +189,6 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
         
-        //display with js
         function getFlagEmoji(country) {
             return countryFlags[country] || '';
         }
@@ -227,6 +226,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
 
+        // Shading countries by visiting frequency
         function shadeCountries() {
             const pathElements = document.querySelectorAll('path');
             pathElements.forEach(path => {
