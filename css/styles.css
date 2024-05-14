@@ -414,6 +414,7 @@ main {
 
 #country-name {
   color: gray;
+  margin-bottom: 0;
 }
 
 .travel-information {
