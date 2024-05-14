@@ -44,10 +44,10 @@ header {
   align-items: center;
   justify-content: center;
 }
-.box > div {
+.box > section {
   flex: 1 0 0;
 }
-.box > div:nth-child(2) {
+.box > section:nth-child(2) {
   text-align: center;
 }
 
