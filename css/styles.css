@@ -44,10 +44,10 @@ header {
   align-items: center;
   justify-content: center;
 }
-.box > span {
+.box > div {
   flex: 1 0 0;
 }
-.box > span:nth-child(2) {
+.box > div:nth-child(2) {
   text-align: center;
 }
 
@@ -118,10 +118,11 @@ header h1 {
   background: #ea5023;
 }
 
-.toggleContainer div {
+.toggleContainer span {
   padding: 5px 10px 5px;
   text-align: center;
   z-index: 1;
+  margin-bottom: 0px;
 }
 
 .toggleCheckbox {
@@ -133,21 +134,21 @@ header h1 {
 }
 
 /* Social is checked */
-.toggleCheckbox:checked + .toggleContainer div:first-child {
+.toggleCheckbox:checked + .toggleContainer span:first-child {
   color: black;
   transition: all 0.3s;
 }
-.toggleCheckbox:checked + .toggleContainer div:last-child {
+.toggleCheckbox:checked + .toggleContainer span:last-child {
   color: white;
   transition: all 0.3s;
 }
 
 /* Professional is checked */
-.toggleCheckbox + .toggleContainer div:first-child {
+.toggleCheckbox + .toggleContainer span:first-child {
   color: #ea5023;
   transition: all 0.3s;
 }
-.toggleCheckbox + .toggleContainer div:last-child {
+.toggleCheckbox + .toggleContainer span:last-child {
   color: white;
   transition: all 0.3s;
 }
@@ -234,13 +235,9 @@ main {
   padding: 5px 20px 5px;
   background-color: rgb(20, 146, 212, 0.6);
   font-size: 0.6em;
-  border-color: #faed48;
-  color: #fff;
-}
-
-.title-buttons a {
+  border: 1px solid #faed48;
   text-decoration: none;
-  color: white;
+  color: #fff;
 }
 
 .me .right-container img {
@@ -482,9 +479,7 @@ main {
 }
 
 #image-char {
-  background-image: "";
-  background-size: contain;
-  background-repeat: no-repeat;
+  height: 50px;
 }
 
 /* Footer styles */

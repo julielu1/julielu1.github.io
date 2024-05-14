@@ -12,7 +12,7 @@
   </head>
   <body id="body">
     <header class="box">
-      <span>
+      <div>
         <nav>
           <ul>
             <li class="selected-page"><a>ME</a></li>
@@ -22,14 +22,15 @@
             <li><a href="projects.html">PROJECTS</a></li>
           </ul>
         </nav>
-      </span>
-      <span><h1>Julie Lu</h1></span>
-      <span>
+      </div>
+      <div><h1>Julie Lu</h1></div>
+      <div>
         <input type="checkbox" id="toggle" class="toggleCheckbox" onclick="toggleSwitch()"/>
         <label for="toggle" class='toggleContainer'>
-        <div>PROFESSIONAL</div>   
-        <div>SOCIAL</div>
-      </span>
+          <span>PROFESSIONAL</span>   
+          <span>SOCIAL</span>
+        </label>
+      </div>
     </header>
     <aside class="fun-fact"></aside>
     <main>
@@ -41,22 +42,22 @@
               a student from Brisbane, Australia
             </div>
             <div class="title-navigation">
-              <button class="title-buttons"><a href="experiences.html">EXPERIENCES</a></button>
-              <button class="title-buttons"><a href="projects.html">PROJECTS</a></button>
+              <a href="experiences.html" class="title-buttons">EXPERIENCES</a>
+              <a href="projects.html" class="title-buttons">PROJECTS</a>
             </div>
           </div>
           <div class="right-container">
-            <img src="images/professional-photo.png" />
+            <img alt="Photo of Julie" src="images/professional-photo.png" />
           </div>
         </div>
       </section>
       <div id="blue-arrows">
-        <img src="images/blue-arrows.png" />
+        <img alt="Blue arrows pointing downwards" src="images/blue-arrows.png" />
       </div>
       <section>
         <div class="about">
           <div class="left-container">
-            <img src="images/Australia.png" />
+            <img alt="Image of Brisbane on a map of Australia" src="images/Australia.png" />
           </div>
           <div class="right-container">
             <h2>About Me</h2>
@@ -68,7 +69,7 @@
     </main>
     <section id="weather-container">
       I wonder what the weather's like?
-      <img height="50px">
+      <img alt="Weather image" src="404image" id="image-char">
     </section>
     <footer>
       <ul>

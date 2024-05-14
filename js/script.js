@@ -9,7 +9,7 @@ function toggleSwitch() {
     }
 
   const element = document.querySelector(
-    ".toggleCheckbox + .toggleContainer div:first-child"
+    ".toggleCheckbox + .toggleContainer span:first-child"
   );
   const style = window.getComputedStyle(element);
   const color = style.getPropertyValue("color");
@@ -26,11 +26,13 @@ function toggleSwitch() {
 }
 
 // Blue arrow animation
-document.addEventListener("DOMContentLoaded", function () {    
-    document.getElementById('blue-arrows').addEventListener('click', function() {
-        const aboutSection = document.querySelector('.about');
-        aboutSection.scrollIntoView({ behavior: 'smooth' });
-    });
+document.addEventListener("DOMContentLoaded", function () { 
+    if (window.location.pathname.endsWith("social.html") || window.location.pathname.endsWith("index.html")) {
+        document.getElementById('blue-arrows').addEventListener('click', function() {
+            const aboutSection = document.querySelector('.about');
+            aboutSection.scrollIntoView({ behavior: 'smooth' });
+        });
+    }
 });
 
 // Fun Fact
