@@ -424,6 +424,23 @@ main {
   padding: 10px;
 }
 
+/* Animation for 'no country selected' */
+@keyframes fade {
+  0% {
+      opacity: 0.2;
+  }
+  50% {
+      opacity: 1;
+  }
+  100% {
+      opacity: 0.2;
+  }
+}
+
+.fade-in-out {
+  animation: fade 2s infinite;
+}
+
 .country-visit-number {
   width: auto;
   text-align: end;

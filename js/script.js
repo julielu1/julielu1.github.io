@@ -241,8 +241,24 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        shadeCountries();
+        function promptToSelect() {
+            const currentText = document.querySelector('.country-name-selected');
+            if (currentText.innerHTML === "SELECT A COUNTRY") {
+                currentText.classList.add('fade-in-out');
+                currentText.style.color = "lightgray";
+                currentText.style.textAlign = "center";
+            } else {
+                currentText.classList.remove('fade-in-out');
+                currentText.style.color = "black";
+                currentText.style.textAlign = "left";
+            }
+        }        
         
+        // Initial running upon loading
+        promptToSelect();
+        shadeCountries();
+
+        // Creating event listeners for every country
         const pathElements = document.querySelectorAll('path');
 
         pathElements.forEach(path => {
@@ -257,6 +273,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             path.addEventListener('click', () => {
                 displayInformation(country);
+                promptToSelect();
             });
         });
     }
