@@ -493,26 +493,36 @@ const tripsData = {
             "name": "1",
             "date": "November 2023",
             "cities": "Shanghai, Guangzhou",
-            "description": "Saw the Great Wall yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap. Iyap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap. Iyap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap. Iyap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap. Iyap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap. Iyap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap. Iyap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap. Iyap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap yap. I",
-            "photos": ["images/aerial-photo.png", "images/aerial-photo.png", "images/aerial-photo.png", "images/aerial-photo.png", ]
+            "description": "Went on a trip with my mum for two weeks to visit family and do some light sight seeing. It had been nearly 10 years since I had been to China. Some places to went to included Shanghai, Anhui (hometown), Guangzhou, Hangzhou, and Huangshan. We climbed up Huangshan, which was one of the highlights of the trip. It took around 6 hours, and it was really cold once we got up to the top!",
+            "photos": ["images/media/mountains.jpg", "images/media/hanfu.jpg"]
         },
         {
             "country": "China",
             "name": "2",
-            "date": "December 2024",
-            "cities": "Shanghai, Guangzhou",
-            "description": "Saw the terracotta warriors",
-            "photos": ["path_to_china_image1.jpg", "path_to_china_image2.jpg"]
+            "date": "August 2015",
+            "cities": "Beijing, Anhui",
+            "description": "Visited my family, and saw the Great Wall! We walked along it for a bit, before getting tired and returning.",
+            "photos": []
         }
     ],
-    "Australia": [
+    "Italy": [
         {
-            "country": "Australia",
+            "country": "Italy",
             "name": "1",
-            "date": "January 2021",
-            "cities": "Sydney, Brisbane",
-            "description": "Saw the opera house",
-            "photos": ["path_to_australia_image1.jpg", "path_to_australia_image2.jpg"]
+            "date": "July 2023",
+            "cities": "Venice, Florence, Cinque Terre, Milan, Rome",
+            "description": "We went to Italy after my short exchange at LSE in London prior. We took trains the entire way, and stayed in each place for only a couple days. We did 2 nights in Venice, 1 night in Florence, 3 nights in Cinque Terre (rest point in the trip!) 1 night in Milan, and 3 nights in Rome. It was peak tourist season, so it was incredibly busy, and there was also a heatwave at the same time. We had to wake up really early and do most of the touring very early in the morning! In Cinque Terre, we stayed in Riomaggiore, at the top of the hill (600 steps to where we were staying or - according to Google Maps - a 6 minute walk: if you could fly'). ",
+            "photos": ["images/media/venice.jpg"]
+        }
+    ],
+    "Peru": [
+        {
+            "country": "Peru",
+            "name": "1",
+            "date": "December 2019",
+            "cities": "Cusco, Lima, Arequipa",
+            "description": "Went to Peru with Antipodeans during high school - fantastic experience! We went for three weeks and did a three day Lares Trek hike. It was stunning, and very different to any other country I had been to before. The people and the culture was really cool to be immersed in.",
+            "photos": []
         }
     ]
 };

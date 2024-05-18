@@ -482,19 +482,19 @@ main {
 
 .trip-card p {
   margin-bottom: 5px;
-  max-height: 100px; /* Set the maximum height */
-  overflow-y: auto; /* Allow vertical scrolling */
+  max-height: 100px;
+  overflow-y: auto;
 }
 
 .photos-container {
   overflow-x: auto;
-  white-space: nowrap; /* Prevent line breaks */
-  max-height: 200px; /* Set a maximum height for the container */
+  white-space: nowrap;
+  max-height: 200px;
 }
 
 .photos-container img {
-  height: 150px; /* Set a specific height for the images */
-  margin-right: 10px; /* Add some spacing between images */
+  height: 200px;
+  margin-right: 10px;
 }
 
 
