@@ -484,6 +484,7 @@ const funFacts = [
     "These fun facts are updated every 5 minutes",
     "I've visited over 10 countries in the past year.",
     "I'm learning to play the guitar.",
+    "The colour scheme for this website was originally based off of Star War's Republic Commandos.",
   ];
 
 const tripsData = {
@@ -522,6 +523,24 @@ const tripsData = {
             "date": "December 2019",
             "cities": "Cusco, Lima, Arequipa",
             "description": "Went to Peru with Antipodeans during high school - fantastic experience! We went for three weeks and did a three day Lares Trek hike. It was stunning, and very different to any other country I had been to before. The people and the culture was really cool to be immersed in.",
+            "photos": []
+        }
+    ],
+    "United Kingdom": [
+        {
+            "country": "United Kingdom",
+            "name": "1",
+            "date": "June 2010",
+            "cities": "London, Stonehenge",
+            "description": "Travelled with Europe with my family. In London, visited Big Ben, and the Cathedral. I was quite young so I don't remember too much of it.",
+            "photos": []
+        },
+        {
+            "country": "United Kingdom",
+            "name": "2",
+            "date": "June-July 2023",
+            "cities": "London, Windsor",
+            "description": "Attended London School of Economics (LSE) for a short exchange during university. Was a fun trip with friends. I visited all the main attractions, and also got to do a weekend trip out to Amsterdam and Windsor Castle. There was also a mid-exchange boat party on the Thames River hosted by LSE, which was a lot of fun. Other highlights included watching Phantom of the Opera at the King's Theatre.",
             "photos": []
         }
     ]
