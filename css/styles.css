@@ -34,7 +34,7 @@ body {
 header {
   background: none;
   color: #fff;
-  padding: 10px 0;
+  padding: 3% 0;
   width: 100%;
   position: relative;
 }
@@ -80,16 +80,14 @@ header nav ul li:not(.selected-page) a:hover{
 }
 
 /* Title styles */
-
 header h1 {
   margin-block-start: 0em;
   margin-block-end: 0em;
-  font-size: 2em;
+  font-size: 3em;
   margin: 0;
 }
 
 /* Side switch */
-
 .toggleContainer {
   position: relative;
   display: grid;
@@ -335,9 +333,8 @@ main {
   margin-bottom: 10px;
 }
 
-.about .right-container p {
-  font-size: 16px;
-  line-height: 1.5;
+.about article p {
+  font-size: 1em;
 }
 
 /* Media - gallery content */
@@ -532,6 +529,7 @@ main {
 
 /* Weather container */
 #weather-container {
+  font-size: 1em;
   background: rgb(2, 2, 2, 0.6);
   color: #fff;
   text-align: center;
@@ -612,8 +610,13 @@ footer ul li ul a:hover {
 
 /* Add this media query for iPhones */
 @media only screen and (max-width: 767px) {
+
   header {
     padding: 10px 20px;
+  }
+
+  header h1 {
+    font-size: 1.5em;
   }
 
   .box {
@@ -648,12 +651,19 @@ footer ul li ul a:hover {
     margin: 0 10px;
   }
 
+  .fun-fact {
+    margin: 0 auto;
+    width: 80%;
+    font-size: 0.6em !important;
+  }
+
   .me {
     margin: 0 auto;
     display: flex;
     flex-direction: column-reverse;
     justify-content: center;
     align-items: center;
+    text-align: center;
     margin-top: 0px;
     position: relative;
   }
@@ -669,7 +679,7 @@ footer ul li ul a:hover {
 
   .me .right-container img {
     height: auto;
-    width: 250px;
+    width: 150px;
   }
 
   .about {
@@ -682,6 +692,10 @@ footer ul li ul a:hover {
 
   .about:nth-of-type(3) {
     flex-direction: column;
+  }
+
+  .about article p {
+    font-size: 0.8em;
   }
 
   .travel-main {
@@ -707,6 +721,12 @@ footer ul li ul a:hover {
   
   .image-gallery > li {
     height: 100px;
+  }
+
+  #weather-container {
+    font-size: 0.8em;
+    margin: 0 auto;
+    width: 80%;
   }
 
   footer ul {
