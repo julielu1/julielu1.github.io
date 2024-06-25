@@ -67,7 +67,8 @@ document.addEventListener("DOMContentLoaded", function () {
 // Weather API
 function setWeatherContainer(cityName, temperature, conditionText, iconPath) {
     const weatherContainer = document.getElementById("weather-container");
-    weatherContainer.innerHTML = `<div>Looks like you're visiting from ${cityName}! The local weather is ${temperature}°C and ${conditionText}<img height="50px" src="${iconPath}" alt="${conditionText}"> </div>`;
+    lowCapsConditionText = conditionText.toLowerCase();
+    weatherContainer.innerHTML = `<div>Looks like you're visiting from ${cityName}! The local weather is ${temperature}°C and ${lowCapsConditionText}<img height="50px" src="${iconPath}" alt="${conditionText}"> </div>`;
 }
 
 document.addEventListener("DOMContentLoaded", function () {
