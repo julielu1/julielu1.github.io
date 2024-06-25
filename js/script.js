@@ -1,7 +1,5 @@
 // Top switches
 function toggleSwitch() {
-  console.log("Switch is toggling!");
-
   function changePage(page) {
     setTimeout(function() {
         window.location.href = page;
